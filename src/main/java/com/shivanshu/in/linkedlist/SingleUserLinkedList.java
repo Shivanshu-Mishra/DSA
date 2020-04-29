@@ -1,43 +1,107 @@
 package com.shivanshu.in.linkedlist;
 
+/**
+ * Each node in list contain data and reference to next node. No node element contain reference to
+ * previous node. Last node reference to null
+ *
+ * @param <T>
+ */
 public class SingleUserLinkedList<T> implements UserLinkedList<T> {
-    private Node head;
-    private Node tail;
-    private int numberOfElement=0;
+    private Node<T> head;
+    private Node<T> tail;
+    private int numberOfElement = 0;
 
+    /**
+     * Insert element at first position in LinkedList
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @param value - element to be inserted
+     */
     public void insertFirst(T value) {
-
+        Node<T> newNode = null;
+        if (this.head == null) {
+            newNode = new Node<T>(value, null);
+            this.tail = newNode;
+        } else {
+            newNode = new Node<T>(value, this.head.next);
+        }
+        this.head = newNode;
+        numberOfElement++;
     }
 
+    /**
+     * Insert element at last position in LinkedList
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @param value - element to be inserted
+     */
     public void insertLast(T value) {
-
+        Node<T> newNode = new Node<T>(value, null);
+        if (this.tail != null) {
+            this.tail.next = newNode;
+        }
+        this.tail = newNode;
+        numberOfElement++;
     }
 
+    /**
+     * Insert element at specified position in LinkedList
+     * Time Complexity - O(N)
+     * Space Complexity - O(1)
+     *
+     * @param position - in linked list where element need to be  inserted.
+     * @param element  - to be inserted
+     */
     public void insert(T element, int position) {
+        if (position < 0 || position > size()) {
+            throw new IndexOutOfBoundsException("Position to insert should be between 0 and " + size());
+        }
 
+        if (position == 0) {
+            insertFirst(element);
+        } else if (position == size()) {
+            insertLast(element);
+        } else {
+            Node<T> node = this.head;
+            for (int index = 1; index < position; index++) {
+                node = node.next;
+            }
+            node.next = new Node<T>(element, node.next);
+        }
     }
 
+    /**
+     * Insert element in LinkedList
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @param element - to be inserted
+     */
     public void insert(T element) {
         Node newNode = new Node(element, null);
-        if (head == null && tail == null) {
+        if (head == null) {
             head = newNode;
-            tail = newNode;
-            numberOfElement++;
-            return;
+        } else {
+            this.tail.next = newNode;
         }
-
-        Node node = this.head;
-        while (node.next != null) {
-            node.next = newNode;
-            tail = newNode;
-        }
+        this.tail = newNode;
+        numberOfElement++;
     }
 
+    /**
+     * Check if element in LinkedList
+     * Time Complexity - O(N)
+     * Space Complexity - O(1)
+     *
+     * @param element - to be inserted
+     * @return - true if element exist
+     */
     public boolean contain(T element) {
         if (this.head == null || this.tail == null) {
             return false;
         }
-
         Node node = this.head;
         while (node != null) {
             if (node.element.equals(element)) {
@@ -48,42 +112,183 @@ public class SingleUserLinkedList<T> implements UserLinkedList<T> {
         return false;
     }
 
-    public void delete(T value) {
-
+    /**
+     * Delete element from LinkedList
+     * Time Complexity - O(N)
+     * Space Complexity - O(1)
+     *
+     * @param value - to be deleted
+     * @throw EmptyLinkedListException
+     */
+    public void delete(T value) throws EmptyLinkedListException {
+        if (this.tail == null || this.head == null) {
+            throw new EmptyLinkedListException("Cannot perform delete operation");
+        }
+        Node<T> node = this.head;
+        if (node.element.equals(value)) {
+            this.head = node.next;
+            numberOfElement--;
+            return;
+        }
+        while (node != this.tail) {
+            if (node.next == null && node.element.equals(value)) {
+                this.tail = null;
+                break;
+            }
+            if (node.next.element.equals(value)) {
+                node.next = node.next.next;
+                numberOfElement--;
+                break;
+            }
+            node = node.next;
+        }
     }
 
-    public void deleteLast() {
-
+    /**
+     * Delete last element from LinkedList
+     * Time Complexity - O(N)
+     * Space Complexity - O(1)
+     *
+     * @throw EmptyLinkedListException
+     */
+    public void deleteLast() throws EmptyLinkedListException {
+        if (this.tail == null) {
+            throw new EmptyLinkedListException("Cannot perform delete operation");
+        }
+        Node<T> node = this.head;
+        while (node != this.tail) {
+            if (node.next == tail) {
+                node.next = null;
+                this.tail = null;
+                numberOfElement--;
+                break;
+            }
+            node = node.next;
+        }
     }
 
-    public void deleteFirst() {
-
+    /**
+     * Delete First element from LinkedList
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @throw EmptyLinkedListException
+     */
+    public void deleteFirst() throws EmptyLinkedListException {
+        if (this.head == null) {
+            throw new EmptyLinkedListException("Cannot perform delete operation");
+        }
+        this.head = this.head.next;
+        numberOfElement--;
     }
 
-    public void delete(int position) {
+    /**
+     * Delete element from specified position in LinkedList
+     * Time Complexity - O(N)
+     * Space Complexity - O(1)
+     *
+     * @throw EmptyLinkedListException
+     */
+    public void delete(int position) throws EmptyLinkedListException {
+        if (position < 0 || position >= numberOfElement) {
+            throw new IndexOutOfBoundsException(position + " cannot be deleted.");
+        }
 
+        if (position == 0) {
+            deleteFirst();
+        } else if (position == numberOfElement - 1) {
+            deleteLast();
+        } else {
+            Node<T> node = this.head.next;
+            int index = 1;
+            while (index < position - 1) {
+                node = node.next;
+                index++;
+            }
+            node.next = node.next.next;
+            numberOfElement--;
+        }
     }
 
+    /**
+     * Destroy LinkedList
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     */
     public void destroy() {
-
+        this.head = null;
+        this.tail = null;
+        numberOfElement = 0;
     }
 
+    /**
+     * Get  size of Linked List
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @return int - number of element in LinkedList
+     */
     public int size() {
         return numberOfElement;
     }
 
-    public T getFirst() {
-        return null;
+    /**
+     * Get first element of Linked List
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @return T - first element in linked list.
+     */
+    public T getFirst() throws EmptyLinkedListException {
+        if (this.head != null)
+            return this.head.element;
+        throw new EmptyLinkedListException("LinkedList is empty");
     }
 
-    public T getLast() {
-        return null;
+    /**
+     * Get last element of Linked List
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @return T - last element in linked list.
+     */
+    public T getLast() throws EmptyLinkedListException {
+        if (this.tail != null)
+            return this.tail.element;
+        throw new EmptyLinkedListException("LinkedList is empty");
     }
 
-    public T get(int position) {
-        return null;
+    /**
+     * Get element at index in Linked List
+     * Time Complexity - O(N)
+     * Space Complexity - O(1)
+     *
+     * @return T - first element in linked list.
+     */
+    public T get(int index) throws EmptyLinkedListException {
+        if (size() == 0) {
+            throw new EmptyLinkedListException("LinkedList is empty");
+        }
+
+        if (index > numberOfElement - 1) {
+            throw new IndexOutOfBoundsException("Maximum indexes in Linked list is " + (numberOfElement - 1));
+        }
+
+        int pos = 0;
+        Node<T> node = this.head;
+        while (pos != index) {
+            node = node.next;
+            pos++;
+        }
+        return node.element;
     }
 
+    /**
+     * This class represent Node in Linked to store element of Type and reference
+     * next node.
+     *
+     * @param <T>
+     */
     public static class Node<T> {
         T element;
         Node next;
