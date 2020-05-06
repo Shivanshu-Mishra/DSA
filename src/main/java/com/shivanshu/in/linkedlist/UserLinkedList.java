@@ -44,24 +44,24 @@ public interface UserLinkedList<T> {
      *
      * @param element - to be deleted from LinkedList
      */
-    void delete(T element);
+    void delete(T element) throws EmptyLinkedListException;
 
     /**
      * Delete last element in linked list.
      */
-    void deleteLast();
+    void deleteLast() throws EmptyLinkedListException;
 
     /**
      * Delete first element in linked list.
      */
-    void deleteFirst();
+    void deleteFirst() throws EmptyLinkedListException;
 
     /**
      * Delete element/node at specified position
      *
      * @param position - at which we have to delete element.
      */
-    void delete(int position);
+    void delete(int position) throws EmptyLinkedListException;
 
     /**
      * Destroy LinkedList
@@ -79,21 +79,24 @@ public interface UserLinkedList<T> {
      * Get first element in linkedlist
      *
      * @return - First element in linked list
+     * @throws  - {@link EmptyLinkedListException}
      */
-    T getFirst();
+    T getFirst() throws EmptyLinkedListException;
 
     /**
      * Get last element in linkedlist
      *
      * @return - Last element in Linked list
+     * @throws EmptyLinkedListException
      */
-    T getLast();
+    T getLast() throws  EmptyLinkedListException;
 
     /**
      * Get element at specified position.
      *
-     * @param position - Position in linked list
-     * @return - Element
+     * @param index - in linked list
+     * @return - element at indexed position
+     * @throws - {@link EmptyLinkedListException}
      */
-    T get(int position);
+    T get(int index) throws  EmptyLinkedListException;
 }
