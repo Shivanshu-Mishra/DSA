@@ -1,12 +1,14 @@
 package com.shivanshu.in.linkedlist;
 
+import java.util.Iterator;
+
 /**
  * Each node in list contain data and reference to next node. No node element contain reference to
  * previous node. Last node reference to null
  *
  * @param <T>
  */
-public class SingleUserLinkedList<T> implements UserLinkedList<T> {
+public class SingleUserLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
     private Node<T> head;
     private Node<T> tail;
     private int numberOfElement = 0;
@@ -281,6 +283,39 @@ public class SingleUserLinkedList<T> implements UserLinkedList<T> {
             pos++;
         }
         return node.element;
+    }
+
+    /**
+     * @return - iterator to loop through elements in LinkedList
+     *
+     * NOTE: LinkedList modification while traversal will give unpredictable output
+     */
+    public Iterator<T> iterator() {
+        return new SingleLinkedListIterator<T>(head);
+    }
+
+    class SingleLinkedListIterator<T> implements Iterator<T> {
+        Node<T> head;
+        Node<T> node;
+
+        public SingleLinkedListIterator(Node<T> head) {
+            this.head = head;
+            this.node = head;
+        }
+
+        public boolean hasNext() {
+            return this.node != null;
+        }
+
+        public T next() {
+            T element=node.element;
+            node=node.next;
+            return element;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException("SingleUserLinkedList operation not permissible");
+        }
     }
 
     /**

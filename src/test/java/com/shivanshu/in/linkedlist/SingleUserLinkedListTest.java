@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class SingleUserLinkedListTest {
     private UserLinkedList testList;
@@ -332,5 +332,21 @@ public class SingleUserLinkedListTest {
         testList.insertLast("Life");
         testList.destroy();
         testList.getFirst();
+    }
+
+    @Test
+    public void testTraversal(){
+        List<String> expectedList= Arrays.asList("This","is","Single","LinkedList");
+        List<String> actualList=new ArrayList<String>();
+        SingleUserLinkedList<String> testList = new SingleUserLinkedList<String>();
+        testList.insert("This");
+        testList.insert("is");
+        testList.insert("Single");
+        testList.insert("LinkedList");
+        Iterator<String> iterator=testList.iterator();
+        while(iterator.hasNext()){
+            actualList.add(iterator.next());
+        }
+        assertEquals(expectedList,actualList);
     }
 }
