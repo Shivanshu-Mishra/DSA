@@ -2,13 +2,15 @@ package com.shivanshu.in.linkedlist;
 
 import java.util.Iterator;
 
+import com.shivanshu.in.linkedlist.DoubleLinkedList.Node;
+
 /**
  * In Double Linked List each node contain reference to previous and next node
  * beside that each node have data item. Last node will refer to null as next reference.
  *
  * @param <T>
  */
-public class DoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
+public class CircularDoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
     private int numberOfElement = 0;
     private Node<T> head;
     private Node<T> tail;
@@ -25,8 +27,9 @@ public class DoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
             head = new Node<T>(element, null, null);
             tail = head;
         } else {
-            Node<T> newNode = new Node<T>(element, null, head);
+            Node<T> newNode = new Node<T>(element, tail, head);
             head.previous = newNode;
+            tail.next = newNode;
             head = newNode;
         }
         numberOfElement++;
@@ -44,8 +47,9 @@ public class DoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
             tail = new Node<T>(element, null, null);
             head = tail;
         } else {
-            Node<T> newNode = new Node<T>(element, tail, null);
+            Node<T> newNode = new Node<T>(element, tail, head);
             tail.next = newNode;
+            head.previous = newNode;
             tail = newNode;
         }
         numberOfElement++;
@@ -148,11 +152,14 @@ public class DoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
     public void deleteLast() throws EmptyLinkedListException {
         validateIfLinkedListIsEmpty();
         if (size() == 1) {
+            head.previous = null;
             head = null;
+            tail.next = null;
             tail = null;
         } else {
-            tail.previous.next = null;
+            tail.previous.next = head;
             tail = tail.previous;
+            head.previous = tail;
         }
         numberOfElement--;
     }
@@ -165,10 +172,13 @@ public class DoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
     public void deleteFirst() throws EmptyLinkedListException {
         validateIfLinkedListIsEmpty();
         if (size() == 1) {
+            head.previous = null;
             head = null;
+            tail.next = null;
             tail = null;
         } else {
             head.next.previous = null;
+            tail.previous = head.next;
             head = head.next;
         }
         numberOfElement--;
@@ -233,6 +243,7 @@ public class DoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
             node = node.next;
         }
         head = null;
+        tail.next = null;
         tail = null;
         numberOfElement = 0;
     }
@@ -348,33 +359,6 @@ public class DoubleLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
 
         public void remove() {
             throw new UnsupportedOperationException("During iteration remove is not allowed");
-        }
-    }
-
-    /**
-     * This class represent Node in DoubleLinkedList to store element of Type and reference
-     * next node.
-     *
-     * @param <T>
-     */
-    public static class Node<T> {
-        T element;
-        Node next;
-        Node previous;
-
-        Node(T element, Node previous, Node next) {
-            this.element = element;
-            this.previous = previous;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "element=" + element +
-                    "previous=" + previous +
-                    ", next=" + next +
-                    '}';
         }
     }
 }
