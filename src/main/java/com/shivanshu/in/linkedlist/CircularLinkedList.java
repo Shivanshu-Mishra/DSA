@@ -82,18 +82,15 @@ public class CircularLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
         }
     }
 
+    /**
+     * Insert element in LinkedList
+     * Time Complexity - O(1)
+     * Space Complexity - O(1)
+     *
+     * @param element - element to be inserted
+     */
     public void insert(T element) {
-        if (tail == null || head == null) {
-            Node<T> newNode = new Node<T>(element, null);
-            newNode.next = newNode;
-            tail = newNode;
-            head = newNode;
-        } else {
-            Node<T> newNode = new Node<T>(element, tail.next);
-            tail.next = newNode;
-            tail = newNode;
-        }
-        numberOfElement++;
+            insertLast(element);
     }
 
     /**
