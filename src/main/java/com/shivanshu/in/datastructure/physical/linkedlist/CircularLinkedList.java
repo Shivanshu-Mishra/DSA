@@ -1,8 +1,8 @@
-package com.shivanshu.in.linkedlist;
+package com.shivanshu.in.datastructure.physical.linkedlist;
 
 import java.util.Iterator;
 
-import static com.shivanshu.in.linkedlist.SingleUserLinkedList.Node;
+import static com.shivanshu.in.datastructure.physical.linkedlist.SingleUserLinkedList.Node;
 
 /**
  * Each node in list contain data and reference to next node. No node element contain reference to

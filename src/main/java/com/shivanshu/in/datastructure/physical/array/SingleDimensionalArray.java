@@ -1,6 +1,4 @@
-package com.shivanshu.in.array;
-
-import com.sun.org.apache.xml.internal.serialize.LineSeparator;
+package com.shivanshu.in.datastructure.physical.array;
 
 public class SingleDimensionalArray implements DimensionalArray {
 

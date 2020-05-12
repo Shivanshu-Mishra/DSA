@@ -1,4 +1,4 @@
-package com.shivanshu.in.linkedlist;
+package com.shivanshu.in.datastructure.physical.linkedlist;
 
 public class EmptyLinkedListException extends Exception {
      public EmptyLinkedListException(String message){

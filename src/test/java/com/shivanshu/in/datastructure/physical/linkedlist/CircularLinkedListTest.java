@@ -1,13 +1,15 @@
-package com.shivanshu.in.linkedlist;
+package com.shivanshu.in.datastructure.physical.linkedlist;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
-public class DoubleLinkedListTest {
+public class CircularLinkedListTest {
     @Test
     public void testSize() {
-        DoubleLinkedList<Integer> testList = new DoubleLinkedList<Integer>();
+        CircularLinkedList<Integer> testList = new CircularLinkedList<Integer>();
         assertEquals(testList.size(), 0);
         testList.insertFirst(3);
         assertEquals(testList.size(), 1);
@@ -15,7 +17,7 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testInsertFirst() {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("New");
         assertEquals(testList.size(), 1);
         testList.insertFirst("Latest");
@@ -24,22 +26,20 @@ public class DoubleLinkedListTest {
 
     @Test(expected = EmptyLinkedListException.class)
     public void testGetFirstInEmptyList() throws EmptyLinkedListException {
-        DoubleLinkedList<Integer> testList = new DoubleLinkedList<Integer>();
+        CircularLinkedList<Integer> testList = new CircularLinkedList<Integer>();
         testList.getFirst();
     }
 
     @Test
     public void testGetFirst() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("He");
-        assertEquals("He", testList.getFirst());
-        testList.insertFirst("She");
-        assertEquals("She", testList.getFirst());
+        assertEquals(testList.getFirst(), "He");
     }
 
     @Test
     public void testInsertLast() {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertLast("He");
         assertEquals(testList.size(), 1);
         testList.insertLast("She");
@@ -48,28 +48,28 @@ public class DoubleLinkedListTest {
 
     @Test(expected = EmptyLinkedListException.class)
     public void testGetLastEmptyList() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         assertEquals(testList.getLast(), "unique");
     }
 
     @Test
     public void testGetLast() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("I");
         testList.insertLast("am");
         testList.insertFirst("unique");
-        assertEquals("am", testList.getLast());
+        assertEquals(testList.getLast(), "am");
     }
 
     @Test(expected = EmptyLinkedListException.class)
     public void testGetEmptyList() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         assertEquals("I", testList.get(0));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetOutOfBound() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("I");
         testList.insertLast("am");
         assertEquals("I", testList.get(2));
@@ -77,7 +77,7 @@ public class DoubleLinkedListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetBelowBound() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("I");
         testList.insertLast("am");
         assertEquals("I", testList.get(-1));
@@ -85,18 +85,17 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testGetList() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("I");
         testList.insertLast("am");
         testList.insertFirst("unique");
         assertEquals("I", testList.get(1));
         assertEquals("am", testList.get(2));
-        assertEquals("unique", testList.get(0));
     }
 
     @Test(expected = EmptyLinkedListException.class)
     public void testDestroy() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("Everyone");
         testList.insertLast("is");
         testList.insertFirst("unique");
@@ -106,13 +105,13 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testEmptyListContain() {
-        DoubleLinkedList<Integer> testList = new DoubleLinkedList<Integer>();
+        CircularLinkedList<Integer> testList = new CircularLinkedList<Integer>();
         assertFalse(testList.contain(1));
     }
 
     @Test
     public void testPositiveContain() {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("Everyone");
         testList.insertLast("is");
         testList.insertFirst("unique");
@@ -123,13 +122,13 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testNegativeContainEmptyList() {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         assertFalse(testList.contain("Everyone"));
     }
 
     @Test
     public void testNegativeContain() {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insertFirst("Everyone");
         testList.insertLast("is");
         testList.insertFirst("unique");
@@ -138,7 +137,7 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testInsertAtZeroPosition() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("str1", 0);
         assertEquals(testList.get(0), "str1");
         assertEquals(testList.size(), 1);
@@ -149,21 +148,21 @@ public class DoubleLinkedListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testInsertAtNegative() {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("str1", 0);
         testList.insert("str1", -1);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testInsertAtOutOfBound() {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("str1", 0);
         testList.insert("str1", 2);
     }
 
     @Test
     public void testInsertAtLast() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("str0", 0);
         testList.insert("str1", 1);
         testList.insert("str2", 2);
@@ -173,24 +172,18 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testInsertAtPosition() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("str0", 0);
-        testList.insert("str5", 1);
-        testList.insert("str4", 1);
-        testList.insert("str3", 1);
         testList.insert("str2", 1);
         testList.insert("str1", 1);
-        assertEquals(6, testList.size());
-        assertEquals("str1", testList.get(1));
-        assertEquals("str2", testList.get(2));
-        assertEquals("str3", testList.get(3));
-        assertEquals("str4", testList.get(4));
-        assertEquals("str5", testList.get(5));
+        assertEquals(3, testList.size());
+        assertEquals(testList.get(1), "str1");
+        assertEquals(testList.get(2), "str2");
     }
 
     @Test
     public void testInsert() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("First");
         assertEquals(testList.size(), 1);
         assertEquals(testList.get(0), "First");
@@ -201,7 +194,7 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testDeleteFirst() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("First");
         testList.insert("Second");
         testList.insert("Third");
@@ -221,19 +214,19 @@ public class DoubleLinkedListTest {
 
     @Test(expected = EmptyLinkedListException.class)
     public void testDeleteFirstInEmptyList() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.deleteFirst();
     }
 
     @Test(expected = EmptyLinkedListException.class)
     public void testDeleteLastInEmptyList() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.deleteLast();
     }
 
     @Test
     public void testDeleteLast() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("First");
         testList.insert("Second");
         testList.insert("Third");
@@ -253,13 +246,13 @@ public class DoubleLinkedListTest {
 
     @Test(expected = EmptyLinkedListException.class)
     public void testDeleteEmptyInEmptyList() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.delete("NoElement");
     }
 
     @Test
     public void testDelete() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("First");
         testList.insert("Second");
         testList.insert("Third");
@@ -279,13 +272,13 @@ public class DoubleLinkedListTest {
 
     @Test(expected = EmptyLinkedListException.class)
     public void testDeleteIntPositionEmptyList() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.delete(2);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testDeleteOutOfBound() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("I love my country");
         testList.insert("I love my earth");
         testList.delete(2);
@@ -293,7 +286,7 @@ public class DoubleLinkedListTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testDeleteInBound() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("I love my country");
         testList.insert("I love my earth");
         testList.delete(-1);
@@ -301,7 +294,7 @@ public class DoubleLinkedListTest {
 
     @Test
     public void testDeleteInPosition() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("I love my country");
         testList.insert("I love my earth");
         testList.insert("I love coding");
@@ -320,35 +313,23 @@ public class DoubleLinkedListTest {
     }
 
     @Test
-    public void testTraversal() throws EmptyLinkedListException {
-        DoubleLinkedList<String> testList = new DoubleLinkedList<String>();
+    public void testCircularity() throws EmptyLinkedListException {
+        CircularLinkedList<String> testList = new CircularLinkedList<String>();
         testList.insert("a");
         testList.insert("b");
         testList.insert("c");
         testList.insert("d");
 
-        DoubleLinkedList.DoubleLinkedListIterator iterator = testList.iterator();
+        Iterator<String> iterator = testList.iterator();
         assertTrue(iterator.hasNext());
-        assertEquals("a", iterator.next());
+        assertEquals("a",iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals("b", iterator.next());
+        assertEquals("b",iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals("c", iterator.next());
+        assertEquals("c",iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals("d", iterator.next());
-        assertFalse(iterator.hasNext());
-        assertTrue(iterator.hasPrevious());
-        assertEquals("c", iterator.previous());
+        assertEquals("d",iterator.next());
         assertTrue(iterator.hasNext());
-        assertEquals("d", iterator.next());
-        assertTrue(iterator.hasPrevious());
-        assertEquals("c", iterator.previous());
-        assertTrue(iterator.hasPrevious());
-        assertEquals("b", iterator.previous());
-        assertTrue(iterator.hasPrevious());
-        assertEquals("a", iterator.previous());
-        assertFalse(iterator.hasPrevious());
-        assertTrue(iterator.hasNext());
-        assertEquals("b", iterator.next());
+        assertEquals("a",iterator.next());
     }
 }

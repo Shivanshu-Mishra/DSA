@@ -1,4 +1,4 @@
-package com.shivanshu.in.array;
+package com.shivanshu.in.datastructure.physical.array;
 
 public class ValueNotFoundException extends Exception {
 

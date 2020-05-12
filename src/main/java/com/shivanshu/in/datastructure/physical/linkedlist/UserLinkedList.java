@@ -1,4 +1,4 @@
-package com.shivanshu.in.linkedlist;
+package com.shivanshu.in.datastructure.physical.linkedlist;
 
 public interface UserLinkedList<T> {
     /**

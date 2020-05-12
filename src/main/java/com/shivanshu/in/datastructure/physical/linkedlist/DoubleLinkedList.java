@@ -1,4 +1,4 @@
-package com.shivanshu.in.linkedlist;
+package com.shivanshu.in.datastructure.physical.linkedlist;
 
 import java.util.Iterator;
 

@@ -1,10 +1,8 @@
-package com.shivanshu.in.array;
+package com.shivanshu.in.datastructure.physical.array;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static com.shivanshu.in.array.TwoDimensionalArray.Location;
 
 public class TwoDimensionalArrayTest {
     private TwoDimensionalArray tdaTest;
@@ -42,7 +40,7 @@ public class TwoDimensionalArrayTest {
 
     @Test
     public void testSearch() {
-        Location location = tdaTest.search(20);
+        TwoDimensionalArray.Location location = tdaTest.search(20);
         Assert.assertTrue(location.getRow() == 0 && location.getColumn() == 2);
     }
 

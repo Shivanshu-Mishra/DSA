@@ -1,9 +1,7 @@
-package com.shivanshu.in.linkedlist;
+package com.shivanshu.in.datastructure.physical.linkedlist;
 
 import static org.junit.Assert.*;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -232,7 +230,7 @@ public class SingleUserLinkedListTest {
         assertEquals(testList.size(), 5);
         testList.deleteFirst();
         assertFalse(testList.contain("This"));
-        assertNotEquals(testList.size(), 4);
+        assertEquals(4,testList.size());
     }
 
     @Test(expected = EmptyLinkedListException.class)
