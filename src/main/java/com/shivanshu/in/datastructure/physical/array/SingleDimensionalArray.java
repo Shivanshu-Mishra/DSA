@@ -87,7 +87,7 @@ public class SingleDimensionalArray implements DimensionalArray {
         for (int pos = elementPos; pos < sdaArraySize - 1; pos++) {
             sdaArray[pos] = sdaArray[pos + 1];
         }
-        sdaArray[sdaArraySize] = Integer.MIN_VALUE;
+        sdaArray[sdaArraySize-1] = Integer.MIN_VALUE;
         sdaArraySize--;
     }
 

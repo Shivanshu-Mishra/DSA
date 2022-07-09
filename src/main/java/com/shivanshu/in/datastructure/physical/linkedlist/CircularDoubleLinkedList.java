@@ -1,8 +1,8 @@
 package com.shivanshu.in.datastructure.physical.linkedlist;
 
-import java.util.Iterator;
-
 import com.shivanshu.in.datastructure.physical.linkedlist.DoubleLinkedList.Node;
+
+import java.util.Iterator;
 
 /**
  * In Double Linked List each node contain reference to previous and next node

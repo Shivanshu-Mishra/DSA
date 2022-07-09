@@ -45,6 +45,9 @@ public class SingleUserLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
             this.tail.next = newNode;
         }
         this.tail = newNode;
+        if (this.head == null) {
+            this.head = newNode;
+        }
         numberOfElement++;
     }
 
@@ -158,14 +161,21 @@ public class SingleUserLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
             throw new EmptyLinkedListException("Cannot perform delete operation");
         }
         Node<T> node = this.head;
+
         while (node != this.tail) {
             if (node.next == tail) {
                 node.next = null;
-                this.tail = null;
+                this.tail = node;
                 numberOfElement--;
                 break;
             }
             node = node.next;
+        }
+
+        if(node==this.tail){
+            this.head=null;
+            this.tail=null;
+            numberOfElement--;
         }
     }
 
@@ -287,7 +297,7 @@ public class SingleUserLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
 
     /**
      * @return - iterator to loop through elements in LinkedList
-     *
+     * <p>
      * NOTE: LinkedList modification while traversal will give unpredictable output
      */
     public Iterator<T> iterator() {
@@ -308,8 +318,8 @@ public class SingleUserLinkedList<T> implements UserLinkedList<T>, Iterable<T> {
         }
 
         public T next() {
-            T element=node.element;
-            node=node.next;
+            T element = node.element;
+            node = node.next;
             return element;
         }
 
