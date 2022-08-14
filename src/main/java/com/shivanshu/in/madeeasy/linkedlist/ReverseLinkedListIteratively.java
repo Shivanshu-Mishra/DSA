@@ -3,9 +3,10 @@ package com.shivanshu.in.madeeasy.linkedlist;
 import com.shivanshu.in.madeeasy.linkedlist.circleexist.Node;
 
 /**
+ * Iterative Version
  * Algortihm to reverse Single linked list
  */
-public class ReverseLinkedList {
+public class ReverseLinkedListIteratively {
     public Node reverse(Node head) {
         Node current = head;
         Node next = current.getNextNode();
