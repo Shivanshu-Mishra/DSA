@@ -1,4 +1,6 @@
-package com.shivanshu.in.madeeasy.linkedlist.circleexist;
+package com.shivanshu.in.madeeasy.linkedlist;
+
+import com.shivanshu.in.madeeasy.linkedlist.circleexist.Node;
 
 public class ReverseLinkedRecursively {
     public Node reverse(Node node){
